@@ -1,29 +1,52 @@
-# mein-vue-projekt
 
-This template should help get you started developing with Vue 3 in Vite.
+# Mein Vue.js Projekt mit Backend
 
-## Recommended IDE Setup
+## Vorbereitung
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+1. **Clone des Repositories**  
+   Clone das Repository, um mit der Entwicklung zu beginnen.
 
-## Customize configuration
+2. **.env-Datei anlegen**  
+   Erstelle eine `.env`-Datei im Stammverzeichnis deines Projekts. Beispielinhalt:
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+   ```
+   DB_HOST=localhost
+   DB_USER=root
+   DB_PASSWORD=Passwort123
+   ```
 
-## Project Setup
+   Achte darauf, die Werte in der `.env`-Datei an deine eigene Datenbankkonfiguration anzupassen.
 
-```sh
-npm install
-```
+## Schritte, um das Projekt auszuführen
 
-### Compile and Hot-Reload for Development
+### 1. MySQL-Datenbank starten und anmelden
+   - Stelle sicher, dass deine MySQL-Datenbank läuft.
+   - Melde dich mit einem MySQL-Client, z.B. **MySQL Workbench**, an und gib dort deinen **Datenbank-Benutzernamen** und **Passwort** ein.  
+   - Achte darauf, dass die Datenbank erreichbar ist, sonst bekommst du einen Fehler.
 
-```sh
-npm run dev
-```
+### 2. Backend starten
+   - Gehe in das Verzeichnis, in dem die Datei `Backend.py` liegt.
+   - Führe die Datei `Backend.py` aus, um den Backend-Server zu starten.
+   
+   ```
+   python Backend.py
+   ```
 
-### Compile and Minify for Production
+### 3. Frontend starten (Vue.js)
+   - Gehe in das Verzeichnis deines Vue.js-Frontends.
+   - Installiere alle notwendigen Abhängigkeiten, falls noch nicht geschehen:
 
-```sh
-npm run build
-```
+     ```
+     npm install
+     ```
+
+   - Starte das Frontend mit dem folgenden Befehl:
+
+     ```
+     npm run dev
+     ```
+
+## Weitere Hinweise
+
+- Wenn du die Datenbank oder Umgebungsvariablen änderst, stelle sicher, dass alle Verbindungen korrekt konfiguriert sind.
+- Vergewissere dich, dass sowohl das Backend als auch das Frontend ordnungsgemäß laufen, um die Anwendung vollständig zu testen.

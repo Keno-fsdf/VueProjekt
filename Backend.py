@@ -21,15 +21,10 @@ wichtig um das programm ausuführen:
 
 1.  ich muss mich in mysql workbench mit passwort einloggen in die datenbank, also explizt anmelden in mysql workbench mit dem apfelkuchen passwort., ansonsten geht es nicht. man könnte alternativ einfach ein modul installieren um das zu umgehen.
 
-2. die datenbank starten bzw. das programm: "anderesProjekt.py2 ausführen.
+2. die datenbank starten bzw. das programm: "Backend.py2 ausführen.
 
 einmal konsole bzw. shell in vscode öffnen.
--->dann cd C:     slash     Users          slash       Keno     slash        Desktop        slash        Sales-Data-Warehouse  slash    mein-vue-projekt -->Dort dann: npm run dev
-
-3. hinweis: ddie datenbank nochmal mit sinvolleren werten befüllen -->Dafür die befühl methode anpassen und dann nochmal die ganze datenbank droppen(manuell) npund neu erstellen lassen mit dem skirpt.
-
-4. mit simon nochmal drüber reden und wie ich das in github mache und davor in einen anderen ordner tue. und wie ich noch ein readme mache dass die andern (von computy) auch das dann ausführen können.
-
+(in den richtigen ordner gehen)-->Dort dann: npm run dev
 
 
 """
@@ -528,24 +523,42 @@ def create_tables():
 def fill_database():
     session = Session()
     try:
-        # Überprüfe, ob der Verlag bereits existiert
-        verlag = session.query(Verlag).filter_by(name="Verlag A").first()
-        if not verlag:
-            verlag = Verlag(name="Verlag A")
-            session.add(verlag)
+        # Verlage hinzufügen
+        verlage = ["Verlag A", "Verlag B", "Verlag C", "Verlag D", "Verlag E"]
+        for verlag_name in verlage:
+            verlag = session.query(Verlag).filter_by(name=verlag_name).first()
+            if not verlag:
+                verlag = Verlag(name=verlag_name)
+                session.add(verlag)
 
-        # Überprüfe, ob der Autor bereits existiert
-        autor = session.query(Autor).filter_by(name="Autor A").first()
-        if not autor:
-            autor = Autor(name="Autor A")
-            session.add(autor)
+        # Autoren hinzufügen
+        autoren = ["Autor A", "Autor B", "Autor C", "Autor D", "Autor E"]
+        for autor_name in autoren:
+            autor = session.query(Autor).filter_by(name=autor_name).first()
+            if not autor:
+                autor = Autor(name=autor_name)
+                session.add(autor)
 
-        # Prüfe, ob das Buch bereits existiert
-        buch = session.query(Buch).filter_by(titel="Buch A").first()
-        if not buch:
-            buch = Buch(titel="Buch A", verlag=verlag)
-            buch.autoren.append(autor)
-            session.add(buch)
+        # Bücher hinzufügen und mit Autoren und Verlagen verknüpfen
+        buecher = [
+            {"titel": "Buch A", "verlag_name": "Verlag A", "autoren": ["Autor A", "Autor B"]},
+            {"titel": "Buch B", "verlag_name": "Verlag B", "autoren": ["Autor C", "Autor D"]},
+            {"titel": "Buch C", "verlag_name": "Verlag C", "autoren": ["Autor A", "Autor E"]},
+            {"titel": "Buch D", "verlag_name": "Verlag D", "autoren": ["Autor B", "Autor D"]},
+            {"titel": "Buch E", "verlag_name": "Verlag E", "autoren": ["Autor C", "Autor E"]}
+        ]
+        
+        for buch_info in buecher:
+            verlag = session.query(Verlag).filter_by(name=buch_info["verlag_name"]).first()
+            buch = session.query(Buch).filter_by(titel=buch_info["titel"]).first()
+            if not buch:
+                buch = Buch(titel=buch_info["titel"], verlag=verlag)
+                # Autoren hinzufügen
+                for autor_name in buch_info["autoren"]:
+                    autor = session.query(Autor).filter_by(name=autor_name).first()
+                    if autor:
+                        buch.autoren.append(autor)
+                session.add(buch)
 
         session.commit()
         logging.info("Datenbank erfolgreich befüllt!")
@@ -554,6 +567,7 @@ def fill_database():
         logging.error(f"Fehler beim Befüllen der Datenbank: {e}")
     finally:
         session.close()
+
 
 if __name__ == "__main__":
     create_database_if_not_exists()
