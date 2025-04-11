@@ -46,7 +46,4 @@
      npm run dev
      ```
 
-## Weitere Hinweise
 
-- Wenn du die Datenbank oder Umgebungsvariablen änderst, stelle sicher, dass alle Verbindungen korrekt konfiguriert sind.
-- Vergewissere dich, dass sowohl das Backend als auch das Frontend ordnungsgemäß laufen, um die Anwendung vollständig zu testen.
