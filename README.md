@@ -1,49 +1,46 @@
+# Vue Project
 
-# Mein Vue.js Projekt mit Backend
+A book management system with Vue.js frontend and Flask backend.
 
-## Vorbereitung
+## Features
 
-1. **Clone des Repositories**  
-   Clone das Repository, um mit der Entwicklung zu beginnen.
+- Manage books, authors, and publishers
+- RESTful API for CRUD operations
+- Vue.js frontend with component-based architecture
+- MySQL database with SQLAlchemy ORM
 
-2. **.env-Datei anlegen**  
-   Erstelle eine `.env`-Datei im Stammverzeichnis deines Projekts. Beispielinhalt:
+## Setup
 
-   ```
-   DB_HOST=localhost
-   DB_USER=root
-   DB_PASSWORD=Passwort123
-   ```
+### Prerequisites
 
-   Achte darauf, die Werte in der `.env`-Datei an deine eigene Datenbankkonfiguration anzupassen.
+- Node.js and npm
+- Python 3.x
+- MySQL
 
-## Schritte, um das Projekt auszuführen
+### Backend Setup
 
-### 1. MySQL-Datenbank starten und anmelden
-   - Stelle sicher, dass deine MySQL-Datenbank läuft.
-   - Melde dich mit einem MySQL-Client, z.B. **MySQL Workbench**, an und gib dort deinen **Datenbank-Benutzernamen** und **Passwort** ein.  
-   - Achte darauf, dass die Datenbank erreichbar ist, sonst bekommst du einen Fehler.
+```bash
+# Install dependencies
+pip install flask flask-cors sqlalchemy pymysql python-dotenv
 
-### 2. Backend starten
-   - Gehe in das Verzeichnis, in dem die Datei `Backend.py` liegt.
-   - Führe die Datei `Backend.py` aus, um den Backend-Server zu starten.
-   
-   ```
-   python Backend.py
-   ```
+# Set environment variables in .env file
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=your_password
 
-### 3. Frontend starten (Vue.js)
-   - Gehe in das Verzeichnis deines Vue.js-Frontends.
-   - Installiere alle notwendigen Abhängigkeiten, falls noch nicht geschehen:
+# Run the backend
+Make sure your MySQL database is running.
+Use a MySQL client such as MySQL Workbench to connect, and enter your database username and password.
+Simply accessing the database through the Python script is not enough—you need to ensure that the connection works and that you have the correct credentials by testing it in a MySQL client first.
+python Backend.py
+```
 
-     ```
-     npm install
-     ```
+### Frontend Setup
 
-   - Starte das Frontend mit dem folgenden Befehl:
+```bash
+# Install dependencies
+npm install
 
-     ```
-     npm run dev
-     ```
-
-
+# Run development server
+npm run dev
+```
